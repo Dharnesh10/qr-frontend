@@ -3,7 +3,7 @@ import { QRCodeCanvas } from 'qrcode.react';
 import axios from 'axios';
 
 const CLIENT_ID = "442074444238-4foj1orau9djqud3kfjl2m5iuq0d2kki.apps.googleusercontent.com";
-const REDIRECT_URI = 'http://localhost:3000';
+const REDIRECT_URI = 'http://10.30.10.18';
 
 const App = () => {
     const [qrState, setQrState] = useState('');
@@ -12,7 +12,7 @@ const App = () => {
 
     useEffect(() => {
         const fetchState = () => {
-            axios.get('http://localhost:5000/qr-state')
+            axios.get('http://10.30.10.18:5000/qr-state')
                 .then(response => setQrState(response.data.state))
                 .catch(error => console.error('Error fetching QR state:', error));
         };
@@ -32,7 +32,7 @@ const App = () => {
                 .then((response) => response.json())
                 .then((data) => {
                     setEmail(data.email);
-                    axios.post('http://localhost:5000/mark-attendance', { email: data.email })
+                    axios.post('http://10.30.10.18:5000/mark-attendance', { email: data.email })
                         .then(() => {
                             setLoginSuccess(true);
                         })
